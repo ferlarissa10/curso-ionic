@@ -14,4 +14,11 @@ export class HomePage {
 
   }
 
+  login(){
+    //empilha uma pagina emcima da outra
+    //this.navCtrl.push('CategoriasPage')
+    //abre uma nova pagina
+    this.navCtrl.setRoot('CategoriasPage')
+  }
+
 }
