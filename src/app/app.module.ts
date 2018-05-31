@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -25,6 +26,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
   ],
   providers: [
     ErrorInterceptorProvider,
+    AuthService,
     StatusBar,
     CategoriaService,
     SplashScreen,

@@ -4,13 +4,14 @@
 <form action="">
   <ion-item>
     <ion-label stacked>Email</ion-label>
-    <ion-input type="email"></ion-input>
+    <ion-input [(ngModel)]="creds.email" name="email" type="email"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label stacked>Senha</ion-label>
-    <ion-input type="password"></ion-input>
+    <ion-input [(ngModel)]="creds.senha" name="senha" type="password"></ion-input>
   </ion-item>
   <button ion-button block (click)="login()"> Entrar</button>
 </form>
 <button ion-button block outline> Registrar</button>
+<button ion-button block outline (click)="carregar()"> Campos</button>
 </ion-content>

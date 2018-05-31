@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { CredenciaisDTO } from './../../models/credenciais.dto';
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
 
@@ -9,9 +11,16 @@ import { NavController, IonicPage, MenuController } from 'ionic-angular';
 
 /** Controller da view Home */
 export class HomePage {
+  
+  //para fazer o login:
+  creds : CredenciaisDTO={
+    email: "",
+    senha:""
+  }
 
   constructor(public navCtrl: NavController,
-              public menu: MenuController) {
+              public menu: MenuController,
+              public auth : AuthService) {
 
   }
 
@@ -24,10 +33,21 @@ export class HomePage {
 
 
   login(){
+
+    this.auth.authenticate(this.creds).subscribe(response =>{
+      console.log(response.headers.get('Authorization'));
+      this.navCtrl.setRoot('CategoriasPage')
+    }, error =>{})
+
     //empilha uma pagina emcima da outra
     //this.navCtrl.push('CategoriasPage')
     //abre uma nova pagina
-    this.navCtrl.setRoot('CategoriasPage')
+   
+    console.log("Logiin:::")
+    console.log(this.creds)
+  }
+  carregar(){
+    this.creds.email="fernandalarissahtp@gmail.com"
   }
 
 }
