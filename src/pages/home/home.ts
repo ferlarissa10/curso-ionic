@@ -36,6 +36,8 @@ export class HomePage {
 
     this.auth.authenticate(this.creds).subscribe(response =>{
       console.log(response.headers.get('Authorization'));
+      //metodo que vai armazenar os dados de usuario caso o login seja feito com sucesso:
+      this.auth.sucessfullLogin(response.headers.get('Authorization'))
       this.navCtrl.setRoot('CategoriasPage')
     }, error =>{})
 
