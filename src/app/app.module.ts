@@ -1,3 +1,4 @@
+import { ClienteService } from './../services/domain/cliente.service';
 import { AuthService } from './../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -26,6 +27,7 @@ import { StorageService } from '../services/storage.service';
     MyApp
   ],
   providers: [
+    ClienteService,
     StorageService,
     ErrorInterceptorProvider,
     AuthService,
