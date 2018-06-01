@@ -24,6 +24,17 @@ export class AuthService{
             })
     }
 
+    refreshToken(){
+        return this.http.post(`${API_CONFIG.baseUrl}/auth/refresh_token`,
+            {},
+            {
+                //para pegar o header da resposta
+                observe: 'response',
+                responseType: 'text'
+            })
+    }
+
+
     //caso aconteca um login de sucesso, recebe o Bearer token:
     sucessfullLogin(authorizationValue : string){
 
