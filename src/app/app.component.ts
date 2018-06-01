@@ -19,8 +19,11 @@ export class MyApp {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
+    //itens menu latera:
     this.pages = [
-      { title: 'Home', component: "HomePage" }
+      { title: 'Home', component: "HomePage" },
+      { title: 'Categoria', component: "CategoriasPage" },
+      { title: 'Profile', component: "ProfilePage" }
     ];
 
   }
