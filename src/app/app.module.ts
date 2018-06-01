@@ -1,3 +1,4 @@
+import { AuthInterceptorProvider } from './../interceptors/auth-interceptor';
 import { ClienteService } from './../services/domain/cliente.service';
 import { AuthService } from './../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +28,7 @@ import { StorageService } from '../services/storage.service';
     MyApp
   ],
   providers: [
+    AuthInterceptorProvider,
     ClienteService,
     StorageService,
     ErrorInterceptorProvider,
