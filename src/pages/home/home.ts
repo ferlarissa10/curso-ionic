@@ -58,4 +58,8 @@ export class HomePage {
     this.creds.email="fernandalarissahtp@gmail.com"
   }
 
+  signup() {
+    this.navCtrl.push('SignupPage');
+  }
+
 }
