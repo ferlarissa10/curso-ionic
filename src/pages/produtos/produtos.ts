@@ -37,17 +37,17 @@ export class ProdutosPage {
    }
 
    loadImageUrls() {
-        for (var i=0; i<this.items.length; i++) {
-          let item = this.items[i];
-          this.produtoService.getSmallImageFromBucket(item.id)
-            .subscribe(response => {
-              item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
-            },
-            error => {});
-        }
-      } 
-
-      showDetail(produto_id : string){
-        this.navCtrl.push('ProdutoDetailPage', {produto_id: produto_id})
+      for (var i=0; i<this.items.length; i++) {
+        let item = this.items[i];
+        this.produtoService.getSmallImageFromBucket(item.id)
+          .subscribe(response => {
+            item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
+          },
+          error => {});
       }
+    } 
+
+    showDetail(produto_id : string){
+      this.navCtrl.push('ProdutoDetailPage', {produto_id: produto_id})
+    }
 }

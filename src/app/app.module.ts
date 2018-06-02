@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CategoriaService } from '../services/domain/categoria.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { StorageService } from '../services/storage.service';
+import { CartService } from '../services/domain/cart.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { StorageService } from '../services/storage.service';
     MyApp
   ],
   providers: [
+    CartService,
     ProdudoService,
     AuthInterceptorProvider,
     ClienteService,
