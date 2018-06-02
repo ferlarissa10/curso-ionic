@@ -1,8 +1,9 @@
+import { ClienteService } from './../../services/domain/cliente.service';
 import { CidadeDto } from './../../models/cidade.dto';
 import { EstadoService } from './../../services/domain/estado.service';
 import { CidadeService } from './../../services/domain/cidade.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EstadoDto } from '../../models/estado.dto';
 
@@ -19,6 +20,8 @@ export class SignupPage {
 
 
   constructor(
+      public alertCtrl : AlertController,
+      public clienteService: ClienteService,
       public cidadeService: CidadeService,
       public estadoService: EstadoService,
       public navCtrl: NavController, 
@@ -45,8 +48,31 @@ export class SignupPage {
   }
 
   signupUser() {
-    console.log("enviou o form");
-  }
+        console.log("enviou o form");
+        this.clienteService.insert(this.formGroup.value)
+          .subscribe(response => {
+            this.showInsertOk();
+          },
+          error => {});
+      }
+    
+  showInsertOk() {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Cadastro efetuado com sucesso',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
+    }
+
     ionViewDidLoad() {
         this.estadoService.findAll()
           .subscribe(response => {
