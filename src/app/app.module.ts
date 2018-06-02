@@ -1,3 +1,4 @@
+import { ProdudoService } from './../services/domain/produto.service';
 import { AuthInterceptorProvider } from './../interceptors/auth-interceptor';
 import { ClienteService } from './../services/domain/cliente.service';
 import { AuthService } from './../services/auth.service';
@@ -28,6 +29,7 @@ import { StorageService } from '../services/storage.service';
     MyApp
   ],
   providers: [
+    ProdudoService,
     AuthInterceptorProvider,
     ClienteService,
     StorageService,
