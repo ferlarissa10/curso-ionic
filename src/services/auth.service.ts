@@ -1,3 +1,4 @@
+import { CartService } from './domain/cart.service';
 import { StorageService } from './storage.service';
 import { LocalUser } from './../models/local_user';
 import { API_CONFIG } from './../config/api.config';
@@ -12,7 +13,10 @@ export class AuthService{
     //classe instanciada que foi importada pelo agular2-jwt
     jwtHelper : JwtHelper = new JwtHelper();
 
-    constructor(public http : HttpClient, public storage : StorageService){}
+    constructor(
+        public http : HttpClient,
+        public cartService: CartService,
+        public storage : StorageService){}
 
     authenticate(creds : CredenciaisDTO){
         return this.http.post(`${API_CONFIG.baseUrl}/login`,
@@ -47,6 +51,7 @@ export class AuthService{
         }
         //setando o usuario para o service de local storage
         this.storage.setLocalUser(user);
+        this.cartService.createOrClearCart();
     }
 
     logout(){
