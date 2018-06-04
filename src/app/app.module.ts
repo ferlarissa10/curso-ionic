@@ -1,4 +1,3 @@
-import { PedidoService } from './../services/domain/pedido.service';
 import { ProdudoService } from './../services/domain/produto.service';
 import { AuthInterceptorProvider } from './../interceptors/auth-interceptor';
 import { ClienteService } from './../services/domain/cliente.service';
