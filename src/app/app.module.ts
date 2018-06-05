@@ -15,6 +15,7 @@ import { CategoriaService } from '../services/domain/categoria.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { StorageService } from '../services/storage.service';
 import { CartService } from '../services/domain/cart.service';
+import { ImageUtilService } from '../services/image-util.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CartService } from '../services/domain/cart.service';
     MyApp
   ],
   providers: [
+    ImageUtilService,
     CartService,
     ProdudoService,
     AuthInterceptorProvider,

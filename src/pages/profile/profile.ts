@@ -4,6 +4,7 @@ import { ClienteDto } from './../../models/cliente.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
+import { CameraOptions, Camera } from '@ionic-native/camera';
 
 /**
  * Generated class for the ProfilePage page.
@@ -19,36 +20,70 @@ import { StorageService } from '../../services/storage.service';
 })
 export class ProfilePage {
 
-  cliente : ClienteDto;
+  cliente: ClienteDto;
   email: string;
+  picture: string
+  cameraOn: boolean = false
 
-  constructor(public navCtrl: NavController, public clienteService: ClienteService,
-     public navParams: NavParams, public storage : StorageService) {
+
+  constructor(public camera: Camera, public navCtrl: NavController, public clienteService: ClienteService,
+    public navParams: NavParams, public storage: StorageService) {
   }
 
   //Esse metodo é executado quando a pagina é carregada
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData() {
     console.log('ionViewDidLoad ProfilePage');
     let localUser = this.storage.getLocalUser();
-    if(localUser && localUser.email){
-      this.clienteService.findByEmail(localUser.email).subscribe(response =>{
+    if (localUser && localUser.email) {
+      this.clienteService.findByEmail(localUser.email).subscribe(response => {
         this.cliente = response as ClienteDto;
         this.getImageIfExists();
-      }, error =>{
-        if(error.status ==403){
+      }, error => {
+        if (error.status == 403) {
           this.navCtrl.setRoot('HomePage')
         }
       })
-    } else{
+    } else {
       this.navCtrl.setRoot('HomePage')
     }
-
   }
-  getImageIfExists(){
+  getImageIfExists() {
     this.clienteService.getImageFromBucket(this.cliente.id)
-    .subscribe(response => {
-      this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg`;
-    }, error=>{})
+      .subscribe(response => {
+        this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg`;
+      }, error => { })
+  }
+
+  getCameraPicture() {
+    this.cameraOn = true;
+
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.picture = 'data:image/png;base64,' + imageData;
+      this.cameraOn = false
+    }, (err) => {
+
+    });
+  }
+
+  sendPicture() {
+    this.clienteService.uploadPicture(this.picture).subscribe(response => {
+      this.picture = null;
+      this.loadData();
+    }, error => { })
+  }
+  cancel(){
+    this.picture = null;
   }
 
 
